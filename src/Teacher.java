@@ -6,6 +6,6 @@ public class Teacher {
     public Teacher( String name, String branch, String lessonCode ) {
         this.name = name;
         this.branch = branch;
-        this.lessonCode = lessonCode;
+        this.phoneNumber = phoneNumber;
     }
 }

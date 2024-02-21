@@ -9,5 +9,6 @@ public class Course {
         this.name = name;
         this.code = code;
         this.prefix = prefix;
+        this.note = note;
     }
 }
