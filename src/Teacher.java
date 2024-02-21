@@ -8,17 +8,4 @@ public class Teacher {
         this.branch = branch;
         this.phoneNumber = phoneNumber;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getPhoneNumber() {
-        return phoneNumber;
-    }
-
-
-    public String getBranch() {
-        return branch;
-    }
 }
