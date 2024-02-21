@@ -11,36 +11,6 @@ public class Course {
         this.prefix = prefix;
         this.note = note;
     }
-
-    public Teacher getCourseTeacher() {
-        return courseTeacher;
-    }
-
-    public void setCourseTeacher( Teacher courseTeacher ) {
-        this.courseTeacher = courseTeacher;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName( String name ) {
-        this.name = name;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public int getNote() {
-        return note;
-    }
-
-
     public void addTeacher( Teacher t ) {
         if (this.prefix.equals(t.branch)) {
             this.courseTeacher = t;
@@ -48,6 +18,13 @@ public class Course {
         } else {
             System.out.println(t.name + " akademisyen bu dersi veremez");
         }
+    }
 
+    public void printTeacher(){
+        if (courseTeacher != null) {
+            System.out.println(this.name + " dersinin Akademisyeni : " + courseTeacher.name);
+        } else {
+            System.out.println(this.name + " dersine Akademisyen atanmamıştır.");
+        }
     }
 }

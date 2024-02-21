@@ -19,77 +19,6 @@ public class Student {
         this.isPass = false;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName( String name ) {
-        this.name = name;
-    }
-
-    public String getStuNo() {
-        return stuNo;
-    }
-
-    public void setStuNo( String stuNo ) {
-        this.stuNo = stuNo;
-    }
-
-    public int getClasses() {
-        return classes;
-    }
-
-    public void setClasses( int classes ) {
-        this.classes = classes;
-    }
-
-    public Course getMatamatik() {
-        return matamatik;
-    }
-
-    public void setMatamatik( Course matamatik ) {
-        this.matamatik = matamatik;
-    }
-
-    public Course getKimya() {
-        return kimya;
-    }
-
-    public void setKimya( Course kimya ) {
-        this.kimya = kimya;
-    }
-
-    public Course getFizik() {
-        return fizik;
-    }
-
-    public void setFizik( Course fizik ) {
-        this.fizik = fizik;
-    }
-
-    public Course getBiyoloji() {
-        return biyoloji;
-    }
-
-    public void setBiyoloji( Course biyoloji ) {
-        this.biyoloji = biyoloji;
-    }
-
-    public double getAvarage() {
-        return avarage;
-    }
-
-    public void setAvarage( double avarage ) {
-        this.avarage = avarage;
-    }
-
-    public boolean isPass() {
-        return isPass;
-    }
-
-    public void setPass( boolean pass ) {
-        isPass = pass;
-    }
 
     public void addBulexamnote( int matamatik, int fizik, int kimya, int biyoloji ) {
         if (matamatik >= 0 && matamatik <= 100) {
@@ -105,6 +34,39 @@ public class Student {
         if (kimya >= 0 && kimya <= 100) {
             this.kimya.note = kimya;
         }
+    }
 
+    public void isPass() {
+        if (this.matamatik.note == 0 || this.fizik.note == 0 || this.kimya.note == 0 ||this.biyoloji.note==0) {
+            System.out.println("Notlar tam olarak girilmemiş");
+        } else {
+            this.isPass = isCheckPass();
+            printNote();
+            System.out.println("Ortalama : " + this.avarage);
+            if (this.isPass) {
+                System.out.println("Sınıfı Geçti. ");
+            } else {
+                System.out.println("Sınıfta Kaldı.");
+            }
+        }
+    }
+
+    public void calcAvarage() {
+        this.avarage = (double) (this.fizik.note + this.kimya.note + this.matamatik.note + this.biyoloji.note) / 4;
+    }
+
+    public boolean isCheckPass() {
+        calcAvarage();
+        return this.avarage > 60;
+    }
+
+    public void printNote(){
+        System.out.println("======================================");
+        System.out.println("Öğrenci : " + this.name);
+        System.out.println("Matematik Notu : " + this.matamatik.note);
+        System.out.println("Fizik Notu : " + this.fizik.note);
+        System.out.println("Kimya Notu : " + this.kimya.note);
+        System.out.println("biyoloji notu : "+ this.biyoloji.note);
+        System.out.println("======================================");
     }
 }
