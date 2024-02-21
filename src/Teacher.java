@@ -1,9 +1,9 @@
 public class Teacher {
     String name;
-    int phoneNumber;
+    String lessonCode;
     String branch;
 
-    public Teacher( String name, String branch, int phoneNumber ) {
+    public Teacher( String name, String branch, String lessonCode ) {
         this.name = name;
         this.branch = branch;
         this.phoneNumber = phoneNumber;

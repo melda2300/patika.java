@@ -8,7 +8,7 @@ public class Student {
     double avarage;
     boolean isPass;
 
-    Student( String name, int classes, String stuNo, Course matamatik, Course fizik, Course kimya, Course biyoloji, boolean isPass ) {
+    Student( String name, int classes, String stuNo, Course matamatik, Course fizik, Course kimya, Course biyoloji) {
         this.name = name;
         this.classes = classes;
         this.stuNo = stuNo;
