@@ -24,6 +24,7 @@ public class Fighter {
             return 0;
         return dusman.healtyh-this.damage;
     }
+
     public boolean dodge(){
         double rondomValue=Math.random()*100;
         return  rondomValue<=this.dodge;
