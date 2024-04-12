@@ -1,25 +1,26 @@
 import java.util.Random;
 
 public class Board {
-
-    private Room[][] rooms;
-    private int rows;
-    private int cols;
+    private Room[][] cells;
+    private int numRows;
+    private int numCols;
     private int totalMines;
     private int remainingRooms;
 
-    public Board( int rows, int cols ) {
-        this.cols = cols;
-        this.rows = rows;
-        rooms = new Room[rows][cols];
-        totalMines = rows * cols / 4;
-        remainingRooms = rows * cols;
+    public Board(int numRows, int numCols) {
+        this.numCols = numCols;
+        this.numRows = numRows;
+        cells = new Room[numRows][numCols];
+        totalMines = numRows * numCols / 4;
+        remainingRooms = numRows * numCols;
+        initializeBoard();
+        placeMines();
     }
 
     private void initializeBoard() {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                rooms[i][j] = new Room();
+        for (int i = 0; i < numRows; i++) {
+            for (int j = 0; j < numCols; j++) {
+                cells[i][j] = new Room();
             }
         }
     }
@@ -28,76 +29,59 @@ public class Board {
         Random random = new Random();
         int minesPlaced = 0;
         while (minesPlaced < totalMines) {
-            int x = random.nextInt(rows);
-            int y = random.nextInt(cols);
-            if (!rooms[x][y].isMine()) {
-                rooms[x][y].setMine(true);
+            int x = random.nextInt(numRows);
+            int y = random.nextInt(numCols);
+            if (!cells[x][y].isMine()) {
+                cells[x][y].setMine(true);
                 minesPlaced++;
             }
         }
     }
 
-    public boolean selectRoom( int x, int y ) {
-        if (rooms[x][y].isMine()) {
-            System.out.println("Oyun bitti! Mayına bastın. ");
-            return true; // oyun biter
+    public boolean selectRoom(int row, int col) {
+        if (cells[row][col].isMine()) {
+            return true; // game over
         }
-        rooms[x][y].setOpened(true);
-        remainingRooms++;
-        if (rooms[x][y].getAdjacentMines() == 0) {
-            for (int i = x - 1; i <= x + 1; i++) {
-                for (int j = y - 1; j <= y + 1; j++) {
-                    if (isValidRoom(i, j) && !rooms[i][y].isOpened()) {
-                        selectRoom(i, j);
+
+        cells[row][col].setOpened(true);
+        remainingRooms--;
+
+        if (cells[row][col].getAdjacentMines() == 0) {
+            for (int i = row - 1; i <= row + 1; i++) {
+                for (int j = col - 1; j <= col + 1; j++) {
+                    if (isValidRoom(i, j) && !cells[i][j].isOpened()) {
+                        if (selectRoom(i, j)) {
+                            return true; // game over
+                        }
                     }
                 }
             }
         }
-        return false;
+
+        return false; // game not over
     }
 
-    private boolean isValidRoom( int x, int y ) {
-        return x >= 0 && x <= rows && y >= 0 && y <= cols;
+    private boolean isValidRoom(int x, int y) {
+        return x >= 0 && x < numRows && y >= 0 && y < numCols;
     }
 
-
-    public Room[][] getRooms( int i, int j ) {
-        return rooms;
+    public Room getRoom(int row, int col) {
+        return cells[row][col];
     }
 
-    public void setRooms( Room[][] rooms ) {
-        this.rooms = rooms;
+    public int getNumRows() {
+        return numRows;
     }
 
-    public int getRows() {
-        return rows;
-    }
-
-    public void setRows( int rows ) {
-        this.rows = rows;
-    }
-
-    public int getCols() {
-        return cols;
-    }
-
-    public void setCols( int cols ) {
-        this.cols = cols;
+    public int getNumCols() {
+        return numCols;
     }
 
     public int getTotalMines() {
         return totalMines;
     }
 
-    public void setTotalMines( int totalMines ) {
-        this.totalMines = totalMines;
-    }
-
     public int getRemainingRooms() {
         return remainingRooms;
-    }
-
-    public void setRemainingRooms( int remainingRooms ) {
-        this.remainingRooms = remainingRooms;
     }
 }
